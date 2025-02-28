@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM openjdk
 LABEL authors="konra"
-
-ENTRYPOINT ["top", "-b"]
+COPY target/swift-service-0.0.1-SNAPSHOT.jar SwiftApp.jar
+ENTRYPOINT ["java", "-jar","SwiftApp.jar"]

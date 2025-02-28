@@ -3,12 +3,12 @@ version: '3.8'
 services:
   postgres:
     image: postgres:latest
-    container_name: postgres_db
+    container_name: postgres_cont
     restart: always
     environment:
-      POSTGRES_USER: myuser
-      POSTGRES_PASSWORD: mypassword
-      POSTGRES_DB: mydatabase
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: db
     ports:
       - "5432:5432"
     volumes:
@@ -20,6 +20,13 @@ services:
     restart: always
     ports:
       - "6379:6379"
-
+    command: redis-server --appendonly yes
+  application:
+    image: application
+    container_name: app
+    restart: always
+    ports:
+      - "8080:8080"
 volumes:
   postgres_data:
+
