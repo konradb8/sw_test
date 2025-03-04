@@ -12,6 +12,8 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.Collections;
 
+// to jest branch roboczy
+
 @RestController
 @RequestMapping("/v1/swift-codes")
 public class SwiftCodeController {
@@ -39,7 +41,7 @@ public class SwiftCodeController {
     }
 
     // Endpoint 2: Return all SWIFT codes for a specific country
-    @GetMapping("/country/{countryISO2}")
+    @GetMapping(value = "/country/{countryISO2}",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getSwiftCodesByCountry(@PathVariable String countryISO2) {
         return ResponseEntity.ok(swiftCodeService.getSwiftCodesByCountry(countryISO2));
     }

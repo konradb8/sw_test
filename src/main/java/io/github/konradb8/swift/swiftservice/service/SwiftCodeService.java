@@ -4,11 +4,12 @@ package io.github.konradb8.swift.swiftservice.service;
 import io.github.konradb8.swift.swiftservice.model.SwiftCode;
 import io.github.konradb8.swift.swiftservice.model.SwiftCodeRequest;
 import io.github.konradb8.swift.swiftservice.model.SwiftCodeResponse;
+import io.github.konradb8.swift.swiftservice.model.SwiftCodesByCountryResponse;
 import io.github.konradb8.swift.swiftservice.repository.SwiftCodeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -87,6 +88,21 @@ public class SwiftCodeService {
                 })
                 .collect(Collectors.toList());
     }
+//    public SwiftCodesByCountryResponse getSwiftCodesByCountry(String countryISO2) {
+//        List<SwiftCodeResponse> swiftCodes = swiftRepository.findByCountryISO2(countryISO2).stream()
+//                .map(entity -> {
+//                    SwiftCodeResponse response = SwiftCodeResponse.fromEntity(entity);
+//                    response.setHeadquarter(isHeadquarter(entity.getSwiftCode()));
+//                    return response;
+//                })
+//                .collect(Collectors.toList());
+//
+//        // Pobranie nazwy kraju (zakładam, że pierwszy wynik ma poprawną nazwę)
+//        String countryName = swiftCodes.isEmpty() ? null : swiftCodes.get(0).getCountryName();
+//
+//        return new SwiftCodesByCountryResponse(countryISO2, countryName, swiftCodes);
+//    }
+
 
 
     public void deleteSwiftCode(String swiftCode) {
