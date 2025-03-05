@@ -11,5 +11,4 @@ public class SwiftApplication {
 
         System.out.println("Hello World");
     }
-
 }

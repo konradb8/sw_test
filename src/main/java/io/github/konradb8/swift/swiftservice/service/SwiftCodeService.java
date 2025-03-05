@@ -1,6 +1,9 @@
 package io.github.konradb8.swift.swiftservice.service;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
+import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import io.github.konradb8.swift.swiftservice.model.SwiftCode;
 import io.github.konradb8.swift.swiftservice.model.SwiftCodeRequest;
 import io.github.konradb8.swift.swiftservice.model.SwiftCodeResponse;
@@ -47,7 +50,6 @@ public class SwiftCodeService {
 //        }
 //        return response;
 //    }
-
     public SwiftCodeResponse getSwiftCodeDetails(String swiftCode) {
         SwiftCode entity = swiftRepository.findBySwiftCode(swiftCode)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "SWIFT code not found"));
@@ -79,15 +81,48 @@ public class SwiftCodeService {
     }
 
 
-    public List<SwiftCodeResponse> getSwiftCodesByCountry(String countryISO2) {
-        return swiftRepository.findByCountryISO2(countryISO2).stream()
-                .map(entity -> {
-                    SwiftCodeResponse response = SwiftCodeResponse.fromEntity(entity);
-                    response.setHeadquarter(isHeadquarter(entity.getSwiftCode()));
-                    return response;
+    public SwiftCodesByCountryResponse getSwiftCodesByCountry(String countryISO2) {
+        List<SwiftCode> entities = swiftRepository.findByCountryISO2(countryISO2);
+
+        if (entities.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Swift code not found");
+        }
+
+        String countryName = entities.get(0).getCountryName();
+
+        SwiftCodesByCountryResponse response = new SwiftCodesByCountryResponse(countryISO2, countryName);
+        response.setCountryISO2(countryISO2);
+        response.setCountryName(countryName);
+
+
+        List<SwiftCodeResponse> swiftCodes = entities.stream()
+                .map(swiftCode -> {
+                    SwiftCodeResponse swiftCodeResponse = new SwiftCodeResponse(entities.get(0));
+                    swiftCodeResponse.setAddress(swiftCode.getAddress());
+                    swiftCodeResponse.setBankName(swiftCode.getName());
+                    swiftCodeResponse.setCountryISO2(swiftCode.getCountryISO2());
+                    swiftCodeResponse.setHeadquarter(swiftCode.getHeadquarter());
+                    swiftCodeResponse.setSwiftCode(swiftCode.getSwiftCode());
+                    return swiftCodeResponse;
                 })
                 .collect(Collectors.toList());
+
+        response.setSwiftCodes(swiftCodes);
+        return response;
     }
+
+
+// Działa spoko
+//
+//    public List<SwiftCodeResponse> getSwiftCodesByCountry(String countryISO2) {
+//        return swiftRepository.findByCountryISO2(countryISO2).stream()
+//                .map(entity -> {
+//                    SwiftCodeResponse response = SwiftCodeResponse.fromEntity(entity);
+//                    response.setHeadquarter(isHeadquarter(entity.getSwiftCode()));
+//                    return response;
+//                })
+//                .collect(Collectors.toList());
+//    }
 //    public SwiftCodesByCountryResponse getSwiftCodesByCountry(String countryISO2) {
 //        List<SwiftCodeResponse> swiftCodes = swiftRepository.findByCountryISO2(countryISO2).stream()
 //                .map(entity -> {
