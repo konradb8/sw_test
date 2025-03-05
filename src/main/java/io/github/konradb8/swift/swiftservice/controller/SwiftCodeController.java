@@ -4,13 +4,17 @@ import io.github.konradb8.swift.swiftservice.model.SwiftCodeRequest;
 import io.github.konradb8.swift.swiftservice.service.CSVImportService;
 import io.github.konradb8.swift.swiftservice.service.SwiftCodeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/v1/swift-codes")
@@ -56,6 +60,16 @@ public class SwiftCodeController {
     public ResponseEntity<?> deleteSwiftCode(@PathVariable String swiftCode) {
         swiftCodeService.deleteSwiftCode(swiftCode);
         return ResponseEntity.ok(Collections.singletonMap("message", "SWIFT code deleted successfully"));
+    }
+
+
+    @ExceptionHandler(ResponseStatusException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public Map<String, String> handleNotFoundException(ResponseStatusException ex) {
+        Map<String, String> errorResponse = new HashMap<>();
+        //errorResponse.put("error", "Nie znaleziono SWIFT Code");
+        errorResponse.put("error", ex.getReason());
+        return errorResponse;
     }
 }
 

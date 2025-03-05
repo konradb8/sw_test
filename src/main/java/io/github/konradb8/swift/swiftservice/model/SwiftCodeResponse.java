@@ -1,6 +1,5 @@
 package io.github.konradb8.swift.swiftservice.model;
 
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -25,7 +24,6 @@ public class SwiftCodeResponse {
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private List<SwiftCodeResponse> branches;
 
-    // Konstruktor dla pojedynczego rekordu (headquarter lub branch)
     public SwiftCodeResponse(SwiftCode swiftCode) {
         this.address = swiftCode.getAddress();
         this.bankName = swiftCode.getName();
