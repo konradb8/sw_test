@@ -50,7 +50,6 @@ public class SwiftCodeService {
 //        }
 //        return response;
 //    }
-
     public SwiftCodeResponse getSwiftCodeDetails(String swiftCode) {
         SwiftCode entity = swiftRepository.findBySwiftCode(swiftCode)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "SWIFT code not found"));
@@ -82,7 +81,6 @@ public class SwiftCodeService {
     }
 
 
-
     public SwiftCodesByCountryResponse getSwiftCodesByCountry(String countryISO2) {
         List<SwiftCode> entities = swiftRepository.findByCountryISO2(countryISO2);
 
@@ -90,15 +88,13 @@ public class SwiftCodeService {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Swift code not found");
         }
 
-        // Pobieramy nazwę kraju z pierwszego wyniku, bo wszystkie powinny mieć tę samą
         String countryName = entities.get(0).getCountryName();
 
-        // Tworzymy odpowiedź
         SwiftCodesByCountryResponse response = new SwiftCodesByCountryResponse(countryISO2, countryName);
         response.setCountryISO2(countryISO2);
         response.setCountryName(countryName);
 
-        // Tworzymy listę swiftCodes
+
         List<SwiftCodeResponse> swiftCodes = entities.stream()
                 .map(swiftCode -> {
                     SwiftCodeResponse swiftCodeResponse = new SwiftCodeResponse(entities.get(0));

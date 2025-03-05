@@ -16,8 +16,6 @@ public class SwiftCodeRequest {
     private String swiftCode;
 
 
-
-
     public String getSwiftCode() {
         return swiftCode;
     }

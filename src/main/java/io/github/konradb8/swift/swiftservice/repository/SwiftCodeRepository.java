@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
+
 @Repository
 public interface SwiftCodeRepository extends JpaRepository<SwiftCode, Long> {
     Optional<SwiftCode> findBySwiftCode(String swiftCode);

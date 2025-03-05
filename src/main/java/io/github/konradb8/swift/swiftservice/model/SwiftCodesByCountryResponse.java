@@ -16,7 +16,6 @@ public class SwiftCodesByCountryResponse {
     private String countryName;
     private List<SwiftCodeResponse> swiftCodes;
 
-
     public SwiftCodesByCountryResponse(String countryISO2, String countryName) {
         this.countryISO2 = countryISO2;
         this.countryName = countryName;

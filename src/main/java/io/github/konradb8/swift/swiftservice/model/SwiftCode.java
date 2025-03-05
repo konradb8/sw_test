@@ -1,5 +1,4 @@
 package io.github.konradb8.swift.swiftservice.model;
-// komentarz testowy do statusu
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import jakarta.persistence.*;
 import lombok.*;
