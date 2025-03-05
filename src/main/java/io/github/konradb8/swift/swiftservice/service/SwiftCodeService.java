@@ -116,9 +116,6 @@ public class SwiftCodeService {
     }
 
 
-
-
-
 // Działa spoko
 //
 //    public List<SwiftCodeResponse> getSwiftCodesByCountry(String countryISO2) {
