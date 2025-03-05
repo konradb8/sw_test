@@ -1,5 +1,6 @@
 package io.github.konradb8.swift.swiftservice.model;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -8,7 +9,6 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-//@JsonPropertyOrder({"address", "bankName", "countryISO2", "countryName", "isHeadquarter", "swiftCode", "branches"})
 @Table(name = "swift_codes")
 public class SwiftCode {
 
