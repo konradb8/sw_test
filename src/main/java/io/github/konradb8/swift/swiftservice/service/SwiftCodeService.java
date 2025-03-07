@@ -1,10 +1,7 @@
 package io.github.konradb8.swift.swiftservice.service;
 
 
-import io.github.konradb8.swift.swiftservice.model.SwiftCode;
-import io.github.konradb8.swift.swiftservice.model.SwiftCodeRequest;
-import io.github.konradb8.swift.swiftservice.model.SwiftCodeResponse;
-import io.github.konradb8.swift.swiftservice.model.SwiftCodesByCountryResponse;
+import io.github.konradb8.swift.swiftservice.model.*;
 import io.github.konradb8.swift.swiftservice.repository.SwiftCodeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -71,15 +68,15 @@ public class SwiftCodeService {
         response.setCountryName(countryName);
 
 
-        List<SwiftCodeResponse> swiftCodes = entities.stream()
+        List<SwiftCodeShortResponse> swiftCodes = entities.stream()
                 .map(swiftCode -> {
-                    SwiftCodeResponse swiftCodeResponse = new SwiftCodeResponse(entities.get(0));
-                    swiftCodeResponse.setAddress(swiftCode.getAddress());
-                    swiftCodeResponse.setBankName(swiftCode.getName());
-                    swiftCodeResponse.setCountryISO2(swiftCode.getCountryISO2());
-                    swiftCodeResponse.setHeadquarter(swiftCode.getHeadquarter());
-                    swiftCodeResponse.setSwiftCode(swiftCode.getSwiftCode());
-                    return swiftCodeResponse;
+                    SwiftCodeShortResponse SwiftCodeShortResponse = new SwiftCodeShortResponse(entities.get(0));
+                    SwiftCodeShortResponse.setAddress(swiftCode.getAddress());
+                    SwiftCodeShortResponse.setBankName(swiftCode.getName());
+                    SwiftCodeShortResponse.setCountryISO2(swiftCode.getCountryISO2());
+                    SwiftCodeShortResponse.setHeadquarter(swiftCode.getHeadquarter());
+                    SwiftCodeShortResponse.setSwiftCode(swiftCode.getSwiftCode());
+                    return SwiftCodeShortResponse;
                 })
                 .collect(Collectors.toList());
 

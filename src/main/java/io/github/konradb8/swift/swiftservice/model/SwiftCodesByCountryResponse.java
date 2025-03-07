@@ -14,7 +14,7 @@ import java.util.List;
 public class SwiftCodesByCountryResponse {
     private String countryISO2;
     private String countryName;
-    private List<SwiftCodeResponse> swiftCodes;
+    private List<SwiftCodeShortResponse> swiftCodes;
 
     public SwiftCodesByCountryResponse(String countryISO2, String countryName) {
         this.countryISO2 = countryISO2;
@@ -30,13 +30,14 @@ public class SwiftCodesByCountryResponse {
         this.countryISO2 = countryISO2;
     }
 
-    public List<SwiftCodeResponse> getSwiftCodes() {
+    public List<SwiftCodeShortResponse> getSwiftCodes() {
         return swiftCodes;
     }
 
-    public void setSwiftCodes(List<SwiftCodeResponse> swiftCodes) {
+    public void setSwiftCodes(List<SwiftCodeShortResponse> swiftCodes) {
         this.swiftCodes = swiftCodes;
     }
+
 
     public String getCountryName() {
         return countryName;
