@@ -3,6 +3,7 @@ package io.github.konradb8.swift.swiftservice.service;
 
 import io.github.konradb8.swift.swiftservice.model.*;
 import io.github.konradb8.swift.swiftservice.repository.SwiftCodeRepository;
+import io.github.konradb8.swift.swiftservice.model.SwiftCodeShortResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -74,7 +75,7 @@ public class SwiftCodeService {
                     SwiftCodeShortResponse.setAddress(swiftCode.getAddress());
                     SwiftCodeShortResponse.setBankName(swiftCode.getName());
                     SwiftCodeShortResponse.setCountryISO2(swiftCode.getCountryISO2());
-                    SwiftCodeShortResponse.setHeadquarter(swiftCode.getHeadquarter());
+                    SwiftCodeShortResponse.setHeadquarter(swiftCode.getIsHeadquarter());
                     SwiftCodeShortResponse.setSwiftCode(swiftCode.getSwiftCode());
                     return SwiftCodeShortResponse;
                 })
@@ -103,7 +104,7 @@ public class SwiftCodeService {
         Swift.setName(request.getBankName());
         Swift.setCountryISO2(request.getCountryISO2().toUpperCase());
         Swift.setCountryName(request.getCountryName().toUpperCase());
-        Swift.setHeadquarter(isHeadquarter(request.getSwiftCode()));
+        Swift.setIsHeadquarter(isHeadquarter(request.getSwiftCode()));
 
         swiftRepository.save(Swift);
     }

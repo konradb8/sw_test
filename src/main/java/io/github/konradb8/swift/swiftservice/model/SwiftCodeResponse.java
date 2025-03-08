@@ -9,8 +9,8 @@ import lombok.Setter;
 import java.util.ArrayList;
 import java.util.List;
 
-//@Getter
-//@Setter
+@Getter
+@Setter
 @AllArgsConstructor
 @JsonPropertyOrder({"address", "bankName", "countryISO2", "countryName", "isHeadquarter", "swiftCode", "branches"})
 public class SwiftCodeResponse {
@@ -29,7 +29,7 @@ public class SwiftCodeResponse {
         this.bankName = swiftCode.getName();
         this.countryISO2 = swiftCode.getCountryISO2();
         this.countryName = swiftCode.getCountryName();
-        this.headquarter = swiftCode.getHeadquarter();
+        this.headquarter = swiftCode.getIsHeadquarter();
         this.swiftCode = swiftCode.getSwiftCode();
         this.branches = new ArrayList<>();
     }
@@ -38,59 +38,4 @@ public class SwiftCodeResponse {
         return new SwiftCodeResponse(entity);
     }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getBankName() {
-        return bankName;
-    }
-
-    public void setBankName(String bankName) {
-        this.bankName = bankName;
-    }
-
-    public String getCountryISO2() {
-        return countryISO2;
-    }
-
-    public void setCountryISO2(String countryISO2) {
-        this.countryISO2 = countryISO2;
-    }
-
-    public String getCountryName() {
-        return countryName;
-    }
-
-    public void setCountryName(String countryName) {
-        this.countryName = countryName;
-    }
-
-    public String getSwiftCode() {
-        return swiftCode;
-    }
-
-    public void setSwiftCode(String swiftCode) {
-        this.swiftCode = swiftCode;
-    }
-
-    public boolean isHeadquarter() {
-        return headquarter;
-    }
-
-    public void setHeadquarter(boolean isheadquarter) {
-        headquarter = isheadquarter;
-    }
-
-    public List<SwiftCodeResponse> getBranches() {
-        return branches;
-    }
-
-    public void setBranches(List<SwiftCodeResponse> branches) {
-        this.branches = branches;
-    }
 }
